@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Long Phạm | Profile</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100%;
+      color: #ffeaff;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(10, 0, 20, 0.7), rgba(10, 0, 20, 0.7)),
+        url('https://i.imgur.com/EGpUoOo.jpeg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .avatar {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 4px solid #ff69b4;
+      box-shadow: 0 0 30px #ff69b4;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      color: #ff69b4;
+      text-shadow: 0 0 15px #ffc6f7;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      color: #ffc6f7;
+      text-shadow: 0 0 10px #ffc6f7;
+      margin-top: 5px;
+    }
+
+    .social {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .social a {
+      padding: 10px 20px;
+      background-color: rgba(255, 192, 203, 0.1);
+      border: 2px solid #ff69b4;
+      border-radius: 10px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 10px #ff69b4;
+      transition: all 0.3s ease;
+    }
+
+    .social a:hover {
+      background-color: #ff69b4;
+      color: black;
+    }
+
+    #toggleMusicBtn {
+      padding: 10px 24px;
+      margin-top: 10px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff69b4;
+      transition: all 0.3s ease;
+    }
+
+    #toggleMusicBtn:hover {
+      background-color: white;
+      color: #ff69b4;
+    }
+
+    #clock {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      color: #ffc6f7;
+      text-shadow: 0 0 8px #ffbbee;
+    }
+
+    .tagline {
+      margin-top: 20px;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #ffbbee;
+      text-shadow: 0 0 8px #ffbbee;
+      min-height: 24px;
+    }
+
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+      width: 100%;
+      margin-top: 40px;
+    }
+
+    .skills, .projects {
+      flex: 1 1 300px;
+      background: rgba(40, 0, 50, 0.6);
+      backdrop-filter: blur(6px);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px #ff69b4;
+    }
+
+    .skills h3, .projects h3 {
+      color: #ff69b4;
+      margin-bottom: 12px;
+      text-shadow: 0 0 10px #ff69b4;
+    }
+
+    .skills li, .projects li {
+      list-style: none;
+      text-align: left;
+      padding: 8px 12px;
+      margin: 6px 0;
+      background-color: rgba(255, 182, 193, 0.08);
+      border-left: 4px solid #ff69b4;
+      border-radius: 5px;
+      color: #ffeaff;
+    }
+
+    .projects a {
+      color: #ffc6f7;
+      text-decoration: none;
+    }
+
+    .projects a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .footer-images {
+      margin: 50px 0 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .footer-images img {
+      border-radius: 12px;
+      box-shadow: 0 0 20px #ff69b4;
+      transition: transform 0.3s ease;
+    }
+
+    .footer-images img:hover {
+      transform: scale(1.05);
+    }
+
+    .footer-images .small-images {
+      display: flex;
+      gap: 25px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .footer-images .large-image {
+      max-width: 300px;
+      width: 100%;
+    }
+
+    .footer-images .small-images img {
+      max-width: 150px;
+      width: 100%;
+    }
+
+    .footer-copyright {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #ffc6f7;
+      text-shadow: 0 0 12px #ff69b4;
+      user-select: none;
+      margin-top: 20px;
+    }
+
+    @supports not (backdrop-filter: blur(6px)) {
+      .skills, .projects {
+        background-color: rgba(40, 0, 50, 0.85);
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1rem;
+      }
+
+      .tagline,
+      #clock {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="avatar" src="https://i.imgur.com/1C5fNkY.jpeg" alt="Mun Avatar" />
+    <h1>🟣 Long Phạm (Tủn)</h1>
+    <h2>💖 CEO: Carellashop1s.store</h2>
+
+    <div class="social">
+      <a href="https://www.facebook.com/long.pham.165752" target="_blank">📘 Facebook</a>
+      <a href="https://zalo.me/0912383259" target="_blank">📱 Zalo</a>
+      <a href="https://tiktok.com/@long.phmtn" target="_blank">🎵 TikTok</a>
+      <a href="http://carellashop1s.store/" target="_blank">🌊SHOP GAME</a>
+    </div>
+
+    <button id="toggleMusicBtn">🔊 Tắt nhạc</button>
+    <p class="tagline" id="typewriter"></p>
+    <p id="clock"></p>
+
+    <div class="grid">
+      <div class="skills">
+        <h3>✨ Kỹ năng nổi bật</h3>
+        <ul>
+          <li>✅ Biết Bay - chim</li>
+          <li>✅ UY TÍN CHẤT LƯỢNG - HÀNG ĐẦU</li>
+          <li>✅ GDTG - ĐT PHÍ RẺ</li>
+          <li>✅ SEO & Tối ưu hóa Web</li>
+        </ul>
+      </div>
+      <div class="projects">
+        <h3>🚀 DỊCH VỤ NỔI BẬT</h3>
+        <ul>
+          <li><a href="#">🔹 Nhập Nạp Gamer - BÁN ACC</a></li>
+          <li><a href="#">🔹 SELL DỊCH VỤ ROBLOX - CÀY THUÊ</a></li>
+          <li><a href="#">🔹 SELL UGPHONE</a></li>
+          <li><a href="#">🔹 THU MUA ACC GAME</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-images">
+      <img class="large-image" src="https://i.imgur.com/7lt7Zip.jpeg" alt="Ảnh lớn chủ quyền" />
+      <div class="small-images">
+        <img src="https://i.imgur.com/SoESwDC.jpeg" alt="Ảnh nhỏ 1" />
+        <img src="https://i.imgur.com/1qbnevC.jpeg" alt="Ảnh nhỏ 2" />
+      </div>
+    </div>
+
+    <div class="footer-copyright">
+      © 2025 Website By TRẦN HÀO | DARKSTACK TEAM
+    </div>
+  </div>
+
+  <audio id="backgroundAudio" loop autoplay preload="auto" style="display:none">
+    <source src="https://pomf2.lain.la/f/s4qib1z0.mp3" type="audio/mpeg" />
+    Trình duyệt của bạn không hỗ trợ phần tử audio.
+  </audio>
+
+  <script>
+    const quotes = [
+      "Uy tín làm nên thương hiệu.",
+      "Nơi khẳng định chính mình.",
+      "Không cần nổi tiếng, chỉ cần uy tín.",
+      "Tiền không tự chảy, phải biết cày và xoay."
+    ];
+
+    let currentIndex = 0;
+
+    function typeWriter(text, i = 0) {
+      const element = document.getElementById("typewriter");
+      if (i === 0) element.textContent = "";
+      if (i < text.length) {
+        element.textContent += text.charAt(i);
+        setTimeout(() => typeWriter(text, i + 1), 60);
+      } else {
+        setTimeout(showNextQuote, 3000);
+      }
+    }
+
+    function showNextQuote() {
+      const quote = quotes[currentIndex];
+      typeWriter(quote);
+      currentIndex = (currentIndex + 1) % quotes.length;
+    }
+
+    function updateClock() {
+      const now = new Date();
+      const h = now.getHours().toString().padStart(2, "0");
+      const m = now.getMinutes().toString().padStart(2, "0");
+      const s = now.getSeconds().toString().padStart(2, "0");
+      document.getElementById("clock").innerText = `${h}:${m}:${s}`;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    const audio = document.getElementById("backgroundAudio");
+    const toggleBtn = document.getElementById("toggleMusicBtn");
+
+    toggleBtn.onclick = () => {
+      if (audio.paused) {
+        audio.play();
+        toggleBtn.innerText = "🔊 Tắt nhạc";
+      } else {
+        audio.pause();
+        toggleBtn.innerText = "🔇 Bật nhạc";
+      }
+    };
+
+    // Tự động phát nhạc khi người dùng tương tác lần đầu
+    window.addEventListener("touchstart", () => {
+      audio.play().catch(() => {});
+    }, { once: true });
+
+    showNextQuote();
+  </script>
+</body>
+</html>
